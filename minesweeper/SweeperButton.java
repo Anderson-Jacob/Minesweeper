@@ -197,18 +197,18 @@ public class SweeperButton extends JButton {
 	 * @param size
 	 */
 	public static void createScaledIcons(Dimension size) {
-		ImageIcon regular = new ImageIcon("src/minesweeper/IconsForCells/default.png");
-		ImageIcon flag = new ImageIcon("src/minesweeper/IconsForCells/flag.png");
-		ImageIcon mine = new ImageIcon("src/minesweeper/IconsForCells/mine.png");
-		ImageIcon zero = new ImageIcon("src/minesweeper/IconsForCells/zero.png");
-		ImageIcon one = new ImageIcon("src/minesweeper/IconsForCells/one.png");
-		ImageIcon two = new ImageIcon("src/minesweeper/IconsForCells/two.png");
-		ImageIcon three = new ImageIcon("src/minesweeper/IconsForCells/three.png");
-		ImageIcon four = new ImageIcon("src/minesweeper/IconsForCells/four.png");
-		ImageIcon five = new ImageIcon("src/minesweeper/IconsForCells/five.png");
-		ImageIcon six = new ImageIcon("src/minesweeper/IconsForCells/six.png");
-		ImageIcon seven = new ImageIcon("src/minesweeper/IconsForCells/seven.png");
-		ImageIcon eight = new ImageIcon("src/minesweeper/IconsForCells/eight.png");
+		ImageIcon regular = new ImageIcon("minesweeper/IconsForCells/default.png");
+		ImageIcon flag = new ImageIcon("minesweeper/IconsForCells/flag.png");
+		ImageIcon mine = new ImageIcon("minesweeper/IconsForCells/mine.png");
+		ImageIcon zero = new ImageIcon("minesweeper/IconsForCells/zero.png");
+		ImageIcon one = new ImageIcon("minesweeper/IconsForCells/one.png");
+		ImageIcon two = new ImageIcon("minesweeper/IconsForCells/two.png");
+		ImageIcon three = new ImageIcon("minesweeper/IconsForCells/three.png");
+		ImageIcon four = new ImageIcon("minesweeper/IconsForCells/four.png");
+		ImageIcon five = new ImageIcon("minesweeper/IconsForCells/five.png");
+		ImageIcon six = new ImageIcon("minesweeper/IconsForCells/six.png");
+		ImageIcon seven = new ImageIcon("minesweeper/IconsForCells/seven.png");
+		ImageIcon eight = new ImageIcon("minesweeper/IconsForCells/eight.png");
 		
 		scaledDefault = scaleImage(regular, size);
 		scaledFlag = scaleImage(flag, size);
