@@ -53,7 +53,7 @@ public class PlayGame {
 		game.setVisible(true);
 	}
 	private static boolean valid(int mineCount, int rowCount, int colCount){
-		return mineCount>0 && rowCount>2 && colCount>2 && mineCount<rowCount*colCount;
+		return mineCount>0 && rowCount>3 && colCount>3 && mineCount<rowCount*colCount-8;
 	}
 	private static void setEasy() {
 		mines = 10;
@@ -83,11 +83,12 @@ public class PlayGame {
 	    formatter.setAllowsInvalid(false);
 	    formatter.setCommitsOnValidEdit(true);
 	    JFormattedTextField mineField = new JFormattedTextField(formatter);
+	    formatter.setMaximum(99);
 	    JFormattedTextField rowField = new JFormattedTextField(formatter);
 	    JFormattedTextField colField = new JFormattedTextField(formatter);	
-		Object[] inputFields = {"Enter Mine Count (minimum: 1)", mineField,
-				 				"Enter Row Count (minimum: 3)", rowField,
-				 				"Enter Column Count (minimum: 3)", colField};
+		Object[] inputFields = {"Enter Row Count (minimum: 4, max: 99)", rowField,
+				 				"Enter Column Count (minimum: 4, max: 99)", colField,
+				 				"Enter Mine Count (minimum: 1, max: (rows*columns)-9)", mineField};
 	    int option = JOptionPane.showConfirmDialog(null, inputFields, "Set Custom Inputs:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 	    if(option!=JOptionPane.OK_OPTION) {
 	    	return false;

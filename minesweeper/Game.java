@@ -11,6 +11,7 @@ public class Game {
 	private int squaresLeft;
 	private boolean lost;
 	private int turns;
+	private boolean generated;
 	
 	/**
 	 * Creates the board for the minesweeper game
@@ -24,18 +25,30 @@ public class Game {
 		board = new SweeperButton[rows][columns];
 		squaresLeft = (rows*columns)-mineCount;
 		lost = false;
-		generateBoard();
-	}
-	private void generateBoard() {
+		generated = false;
 		for(int i = 0; i<board.length; i++)
 			for(int j = 0; j<board[0].length; j++)
 				board[i][j] = new SweeperButton(CellType.ZERO, i, j);
+	}
+	private boolean isBanned(int row, int col, int bannedRow, int bannedCol) {
+		return Math.abs(bannedRow-row)<=1 && Math.abs(bannedCol-col)<=1;
+	}
+	/**
+	 * Places all of the mines on this board and adjusts counts accordingly.
+	 * Ensures that the first square that was clicked is a 0 square
+	 * 
+	 * @param rowClicked - the row that was clicked first
+	 * @param colClicked - the column that was clicked first
+	 */
+	public void generate(int rowClicked, int colClicked) {
+		if(generated)
+			return;
 		int minesLeft = mineCount;
 		Random rng = new Random();
 		while(minesLeft!=0) {
 			int row = rng.nextInt(board.length);
 			int col = rng.nextInt(board[0].length);
-			if(board[row][col].isMine())
+			if(board[row][col].isMine()||isBanned(row,col,rowClicked,colClicked))
 				continue;
 			board[row][col].setMine();
 			minesLeft--;
@@ -47,8 +60,13 @@ public class Game {
 				}
 			}
 		}
+		generated = true;
 	}
-	
+	/**
+	 * Reveals this square, showing the mine count underneath
+	 * @param row - the row of the cell to reveal
+	 * @param col - the column of the cell to reveal
+	 */
 	public void revealSquare(int row, int col){
 		turns++;
 		if(valid(row,col) && !board[row][col].revealed() && !board[row][col].flagged()) {
@@ -64,6 +82,10 @@ public class Game {
 				revealSquare(row, col+1);
 				revealSquare(row+1, col);
 				revealSquare(row-1, col);
+				revealSquare(row-1, col-1);
+				revealSquare(row-1, col+1);
+				revealSquare(row+1, col-1);
+				revealSquare(row+1, col+1);
 			}
 		}
 	}
@@ -90,9 +112,15 @@ public class Game {
 			return false;
 		return true;
 	}
+	/**
+	 * @return the length of the board
+	 */
 	public int getLength() {
 		return board.length;
 	}
+	/**
+	 * @return the width of the board
+	 */
 	public int getWidth() {
 		return board[0].length;
 	}

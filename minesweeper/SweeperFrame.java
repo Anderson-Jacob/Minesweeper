@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 public class SweeperFrame extends JFrame  implements MouseListener{
 	private static final long serialVersionUID = 1L;
 	private Game board;
+	private boolean firstClick;
 	/**
 	 * Creates a MineSweeper GUI.
 	 */
@@ -43,6 +44,7 @@ public class SweeperFrame extends JFrame  implements MouseListener{
 		this.setTitle("Minesweeper");
 		this.setContentPane(topPanel);
 		this.pack();
+		firstClick = true;
 		//add icons and mouse listeners to all of the cells
 		SweeperButton.createScaledIcons(board.getButton(0, 0).getSize());
 		for(int i = 0; i < rows; i++) {
@@ -59,6 +61,10 @@ public class SweeperFrame extends JFrame  implements MouseListener{
 		int modifiers = e.getButton();
 		SweeperButton button = (SweeperButton)e.getSource();
 	    if (modifiers == 1) {
+	    	if(firstClick) {
+	    		board.generate(button.row, button.col);
+	    		firstClick = false;
+	    	}
 	    	//left mouse button pressed
 	        if(!button.revealed()) {
 	        	board.revealSquare(button.row, button.col);
